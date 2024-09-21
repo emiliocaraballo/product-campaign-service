@@ -5,6 +5,7 @@ import { config } from 'dotenv';
 config();
 
 export default {
+  API_URL_SWAGGER: process.env.API_URL_SWAGGER,
   API_PREFIX: process.env.API_PREFIX,
   NODE_ENV: process.env.NODE_ENV,
   APP_PORT: process.env.APP_PORT,
