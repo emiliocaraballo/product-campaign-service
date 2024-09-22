@@ -11,7 +11,7 @@ import { ProductRepositoryTypeORM } from 'src/infrastructure/database/repositori
   controllers: [ProductController],
   providers: [
     {
-      provide: 'productRepository',
+      provide: 'ProductRepository',
       useClass: ProductRepositoryTypeORM,
     },
     GetProductsUseCase,

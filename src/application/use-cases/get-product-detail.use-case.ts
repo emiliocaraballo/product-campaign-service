@@ -1,8 +1,8 @@
 import { GetProductDetailPort } from 'src/application/repositories/get-product-detail-port.interface';
 import { IProductRepository } from 'src/domain/repositories/product-repository.interface';
 import { Product } from 'src/domain/entities/product.entity';
-import { Inject } from '@nestjs/common';
-
+import { Inject, Injectable } from '@nestjs/common';
+@Injectable()
 export class GetProductDetailUseCase implements GetProductDetailPort {
   constructor(
     @Inject('ProductRepository')
