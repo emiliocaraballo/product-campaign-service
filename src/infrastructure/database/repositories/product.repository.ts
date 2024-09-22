@@ -1,24 +1,24 @@
-// src/infrastructure/database/product.repository.ts
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-
-import { IProductRepository } from 'src/application/ports/outbound/product-repository.interface';
-import { Product } from 'src/domain/entities/product.entity';
-import { ProductEntity } from 'src/infrastructure/database/entities/product.entity';
+import { Repository } from 'typeorm';
+import { Product } from '../entities/product.entity';
+import { IProductRepository } from 'src/domain/repositories/product-repository.interface';
 
 @Injectable()
-export class ProductTypeOrmRepository implements IProductRepository {
+export class ProductRepositoryTypeORM implements IProductRepository {
   constructor(
-    @InjectRepository(ProductEntity)
-    private readonly repository: Repository<ProductEntity>,
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
   ) {}
 
-  async findAll(): Promise<Product[] | null> {
-    const products = await this.repository.find();
-    return products.map(
-      (product) =>
-        new Product(product.id, product.name, product.price, product.stock, product.sku, product.description),
-    );
+  async findAll(page: number, limit: number): Promise<Product[]> {
+    return this.productRepository.find({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+  }
+
+  async findById(id: number): Promise<Product | null> {
+    return this.productRepository.findOne({ where: { id } });
   }
 }

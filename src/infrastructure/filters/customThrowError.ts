@@ -13,10 +13,7 @@ export const customThrowError = (additionalError: IErrorData, errorCode?: string
   // Default code
 
   // Get code error from additional error
-  let code = errorCode || additionalError?.code;
-  if (JSON.stringify(additionalError).indexOf('ERROR_WS') != -1) {
-    code = 'ERROR_WS';
-  }
+  const code = errorCode || additionalError?.code;
 
   return {
     code,

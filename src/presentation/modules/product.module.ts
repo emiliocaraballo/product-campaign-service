@@ -1,24 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { ProductController } from 'src/presentation/controllers/product.controller';
-import { ProductTypeOrmRepository } from 'src/infrastructure/database/repositories/product.repository';
-import { ProductUseCase } from 'src/application/use-cases/product-use-cases.service';
-import { ProductEntity } from 'src/infrastructure/database/entities/product.entity';
+import { Product } from 'src/infrastructure/database/entities/product.entity';
+import { ProductController } from '../controllers/product.controller';
+import { GetProductsUseCase } from 'src/application/use-cases/get-products.use-case';
+import { GetProductDetailUseCase } from 'src/application/use-cases/get-product-detail.use-case';
+import { ProductRepositoryTypeORM } from 'src/infrastructure/database/repositories/product.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductEntity])],
+  imports: [TypeOrmModule.forFeature([Product])],
   controllers: [ProductController],
   providers: [
     {
-      provide: 'ProductRepository',
-      useClass: ProductTypeOrmRepository,
+      provide: 'productRepository',
+      useClass: ProductRepositoryTypeORM,
     },
-    {
-      provide: 'ProductService',
-      useClass: ProductUseCase,
-    },
-    ProductUseCase, // Asegúrate de que el caso de uso está aquí
+    GetProductsUseCase,
+    GetProductDetailUseCase,
   ],
 })
 export class ProductModule {}
