@@ -1,4 +1,3 @@
-// src/application/use-cases/get-products.use-case.ts
 import { Injectable, Inject } from '@nestjs/common';
 import { GetProductsPort } from 'src/application/repositories/get-products-port.interface';
 import { IProductRepository } from 'src/domain/repositories/product-repository.interface';
