@@ -19,4 +19,7 @@ export class ProductEntity {
 
   @Column()
   stock: number;
+
+  @Column({ name: 'image_url' })
+  urlImage: string;
 }
