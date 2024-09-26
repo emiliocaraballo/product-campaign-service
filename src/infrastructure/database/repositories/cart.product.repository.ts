@@ -6,6 +6,7 @@ import { ICartProductRepository } from 'src/domain/repositories/cart/cart-produc
 import { Product } from 'src/domain/entities/product/product.entity';
 import { CartProduct } from 'src/domain/entities/cart/cart.product.entity';
 import { ExceptionError } from 'src/infrastructure/filters/exceptionError';
+import messageError from 'src/application/message/message-error';
 
 @Injectable()
 export class CartProductRepositoryTypeORM implements ICartProductRepository {
@@ -58,10 +59,7 @@ export class CartProductRepositoryTypeORM implements ICartProductRepository {
       { quantity: cartProduct.quantity },
     );
     if (response.affected === 0) {
-      throw new ExceptionError({
-        resultCode: -1,
-        code: 'error_update_cart_product',
-      });
+      throw new ExceptionError(messageError.messageErrorCartNotFound);
     }
     return this.findByCartIdAndProductId(cartProduct.cartId, cartProduct.productId);
   }

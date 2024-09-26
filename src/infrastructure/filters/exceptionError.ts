@@ -1,5 +1,13 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
+export class IMessageError {
+  code?: string;
+  title?: string;
+  description?: string;
+  resultCode?: number;
+  statusCode?: number;
+}
+
 export class ExceptionError extends HttpException {
   constructor({
     code = 'UNEXPECTED_ERROR',
@@ -7,13 +15,7 @@ export class ExceptionError extends HttpException {
     title = 'Lo sentimos',
     resultCode = -1,
     statusCode = HttpStatus.NOT_FOUND,
-  }: {
-    code?: string;
-    description?: string;
-    title?: string;
-    resultCode?: number;
-    statusCode?: HttpStatus;
-  }) {
+  }: IMessageError) {
     super(
       {
         code: code,

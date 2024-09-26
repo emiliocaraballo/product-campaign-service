@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { ICartRepository } from 'src/domain/repositories/cart/cart-repository.interface';
 import { Cart } from 'src/domain/entities/cart/cart.entity';
 import { ExceptionError } from 'src/infrastructure/filters/exceptionError';
+import messageError from '../message/message-error';
 
 @Injectable()
 export class GetCartProductUseCase implements GetCartProduct {
@@ -20,12 +21,12 @@ export class GetCartProductUseCase implements GetCartProduct {
     // obtener el carrito de usuario o de la sesion.
     const cart: Cart = await this.cartRepository.findByUserIdOrSession(userId, session);
     if (!cart) {
-      throw new ExceptionError({ resultCode: 1, description: 'No existe el carrito', code: 'cart_not_found' });
+      throw new ExceptionError(messageError.messageErrorCartNotFound);
     }
     // obtener todos los productos del carrito.
     const cartProducts = await this.cartProductRepository.findByCartId(cart.id);
     if (!cartProducts || cartProducts?.length == 0) {
-      throw new ExceptionError({ resultCode: 1, description: 'No existe el carrito', code: 'cart_not_found' });
+      throw new ExceptionError(messageError.messageErrorProductNotFound);
     }
     return cartProducts;
   }

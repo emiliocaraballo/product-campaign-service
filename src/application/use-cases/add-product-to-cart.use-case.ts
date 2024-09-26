@@ -8,6 +8,7 @@ import { ICartRepository } from 'src/domain/repositories/cart/cart-repository.in
 import { Cart } from 'src/domain/entities/cart/cart.entity';
 import { EnumType } from '../dtos/emun.type.dto';
 import { AddToCartDTO } from '../dtos/add-to-cart.dto';
+import messageError from '../message/message-error';
 
 @Injectable()
 export class AddProductToCartUseCase implements AddProductToCart {
@@ -24,7 +25,7 @@ export class AddProductToCartUseCase implements AddProductToCart {
     // Validar si el producto existe
     const product = await this.productRepository.findById(body.productId);
     if (!product?.id) {
-      throw new ExceptionError({ resultCode: 1, description: 'No existe este product', code: 'product_not_found' });
+      throw new ExceptionError(messageError.messageErrorProductNotFound);
     }
 
     // Verificar si el carrito existe
