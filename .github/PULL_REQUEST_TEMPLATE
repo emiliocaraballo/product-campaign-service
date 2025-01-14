@@ -1,0 +1,20 @@
+***¿Está listo para revisión?:*** NO
+## ¿Qué se trabajó?:
+<!--
+¿En qué se trabajó? Si es uno o más issues de Github o JIRA colocar:
+resolves #ISSUE_NUMBER
+resolves #ISSUE_NUMBER
+Si no, enlace de la tarea en Trello
+-->
+## ¿Cómo se trabajó:
+<!--
+Algo que describa de forma precisa cómo se implementó o trabajó para que la revisión sea más rápida
+-->
+## ¿Cómo QA puede verificar esto?:
+<!--
+Agregue pantallazos si es Frontend o App, comandos si es Backend, instrucciones o cualquier cosa
+que sirva para que se pueda verificar y así facilitar la revisión y aprobación.
+Ejemplos:
+* Paso a paso de como verificar
+* Pantallazos mostrando diferencias o demás mostrando el resultado
+* Describir la URL para verificar el trabajo

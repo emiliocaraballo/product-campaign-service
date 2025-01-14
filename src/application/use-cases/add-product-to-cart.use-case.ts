@@ -1,24 +1,23 @@
-import { Inject, Injectable } from '@nestjs/common';
 import { AddProductToCart } from '../repositories/add-product-to-cart.use-case';
 import { CartProduct } from 'src/domain/entities/cart/cart.product.entity';
-import { ICartProductRepository } from 'src/domain/repositories/cart/cart-product-repository.interface';
-import { IProductRepository } from 'src/domain/repositories/product/product-repository.interface';
+import { CartProductRepository } from 'src/domain/repositories/cart/cart-product-repository.interface';
+import { ProductRepository } from 'src/domain/repositories/product/product-repository.interface';
 import { ExceptionError } from 'src/infrastructure/filters/exceptionError';
-import { ICartRepository } from 'src/domain/repositories/cart/cart-repository.interface';
+import { CartRepository } from 'src/domain/repositories/cart/cart-repository.interface';
 import { Cart } from 'src/domain/entities/cart/cart.entity';
 import { EnumType } from '../dtos/emun.type.dto';
 import { AddToCartDTO } from '../dtos/add-to-cart.dto';
 import messageError from '../message/message-error';
+import { Inject } from '@nestjs/common';
 
-@Injectable()
 export class AddProductToCartUseCase implements AddProductToCart {
   constructor(
     @Inject('CartRepository')
-    private readonly cartRepository: ICartRepository,
+    private readonly cartRepository: CartRepository,
     @Inject('CartProductRepository')
-    private readonly cartProductRepository: ICartProductRepository,
+    private readonly cartProductRepository: CartProductRepository,
     @Inject('ProductRepository')
-    private readonly productRepository: IProductRepository,
+    private readonly productRepository: ProductRepository,
   ) {}
 
   async execute(body: AddToCartDTO): Promise<CartProduct> {

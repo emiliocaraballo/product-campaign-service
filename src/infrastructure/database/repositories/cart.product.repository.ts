@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CartProductEntity } from 'src/infrastructure/database/entities/cart.product.entity';
-import { ICartProductRepository } from 'src/domain/repositories/cart/cart-product-repository.interface';
+import { CartProductRepository } from 'src/domain/repositories/cart/cart-product-repository.interface';
 import { Product } from 'src/domain/entities/product/product.entity';
 import { CartProduct } from 'src/domain/entities/cart/cart.product.entity';
 import { ExceptionError } from 'src/infrastructure/filters/exceptionError';
 import messageError from 'src/application/message/message-error';
 
 @Injectable()
-export class CartProductRepositoryTypeORM implements ICartProductRepository {
+export class CartProductRepositoryTypeORM implements CartProductRepository {
   constructor(
     @InjectRepository(CartProductEntity)
     private readonly cartProductRepository: Repository<CartProductEntity>,

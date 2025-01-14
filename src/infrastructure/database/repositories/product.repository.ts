@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductEntity } from 'src/infrastructure/database/entities/product.entity';
 import { Product } from 'src/domain/entities/product/product.entity';
-import { IProductRepository } from 'src/domain/repositories/product/product-repository.interface';
+import { ProductRepository } from 'src/domain/repositories/product/product-repository.interface';
 
 @Injectable()
-export class ProductRepositoryTypeORM implements IProductRepository {
+export class ProductRepositoryTypeORM implements ProductRepository {
   constructor(
     @InjectRepository(ProductEntity)
     private readonly productRepository: Repository<ProductEntity>,

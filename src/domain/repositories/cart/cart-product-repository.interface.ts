@@ -1,6 +1,6 @@
 import { CartProduct } from 'src/domain/entities/cart/cart.product.entity';
 
-export interface ICartProductRepository {
+export interface CartProductRepository {
   findByCartId(cartId: number): Promise<CartProduct[]>;
   save(cartProduct: CartProduct): Promise<CartProduct>;
   update(cartProduct: CartProduct): Promise<CartProduct>;

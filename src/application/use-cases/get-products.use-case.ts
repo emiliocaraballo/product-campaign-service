@@ -1,14 +1,13 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Inject } from '@nestjs/common';
 import { GetProductsPort } from 'src/application/repositories/get-products.interface';
-import { IProductRepository } from 'src/domain/repositories/product/product-repository.interface';
+import { ProductRepository } from 'src/domain/repositories/product/product-repository.interface';
 import { Product } from 'src/domain/entities/product/product.entity';
 import { PageDto, PageMetaDto, PageOptionsDto } from 'src/presentation/dtos/pagination.dto';
 
-@Injectable()
 export class GetProductsUseCase implements GetProductsPort {
   constructor(
     @Inject('ProductRepository')
-    private readonly productRepository: IProductRepository,
+    private readonly productRepository: ProductRepository,
   ) {}
 
   async execute(pageOptionsDto: PageOptionsDto): Promise<PageDto<Product>> {
